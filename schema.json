@@ -1,0 +1,24 @@
+{
+    "tableName": "CSSMathProduct",
+    "columns": [
+        {
+            "name": "id",
+            "type": "INT",
+            "attributes": "NOT NULL AUTO_INCREMENT",
+            "primaryKey": true
+        },
+        {
+            "name": "name",
+            "type": "VARCHAR(255)",
+            "attributes": "NOT NULL"
+        },
+        {
+            "name": "description",
+            "type": "VARCHAR(255)"
+        },
+        {
+            "name": "price",
+            "type": "INT"
+        }
+    ]
+}
