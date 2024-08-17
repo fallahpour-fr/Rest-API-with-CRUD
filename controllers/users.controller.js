@@ -17,8 +17,17 @@ module.exports = {
     findUser: async (req, res, next) => {
         try {
             const userId = req.params.id;
-            const myObject = await User.findByPk(userId)
+            const myObject = await User.findByPk(userId);
             res.status(200).json(myObject);
+        } catch (error) {
+            console.log(error)
+            res.status(500).send();
+        }
+    },
+    findAllUser: async (req, res, next) => {
+        try {
+            const myData = await User.findAll();
+            res.status(200).json(myData);
         } catch (error) {
             console.log(error)
             res.status(500).send();
