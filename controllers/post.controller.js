@@ -74,8 +74,8 @@ module.exports = {
                 });
             }
 
-               // Update Post
-               const [updated] = await Post.update(postData, {
+            // Update Post
+            const [updated] = await Post.update(postData, {
                 where: { id: postId }
             });
 

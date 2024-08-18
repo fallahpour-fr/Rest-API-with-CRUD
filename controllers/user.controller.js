@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const Post = require('../models/post');
+const { where, json } = require('sequelize');
 
 module.exports = {
     createUser: async (req, res, next) => {
@@ -14,11 +16,22 @@ module.exports = {
             res.status(500).send();
         }
     },
-    findUser: async (req, res, next) => {
+    findUser: async (req, res, next) => { 
         try {
-            const userId = req.params.id;
-            const myObject = await User.findByPk(userId);
-            res.status(200).json(myObject);
+            const currentUserId = req.params.id;
+            const myObject = await User.findByPk(currentUserId);
+            const posts = await Post.findAll({
+                where: {
+                    userId: currentUserId
+                }
+            });
+
+            const postValues = posts.map(post => post.dataValues);
+            const newObject={
+                ...myObject.dataValues,
+                posts:postValues
+            }
+            res.status(200).json(newObject);
         } catch (error) {
             console.log(error)
             res.status(500).send();
