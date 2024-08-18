@@ -19,13 +19,14 @@ module.exports = {
     findUser: async (req, res, next) => { 
         try {
             const currentUserId = req.params.id;
-            const myObject = await User.findByPk(currentUserId);
-            const posts = await Post.findAll({
-                where: {
-                    userId: currentUserId
-                }
-            });
+            // const myObject = await User.findByPk(currentUserId);
+            // const posts = await Post.findAll({
+            //     where: {
+            //         userId: currentUserId
+            //     }
+            // });
 
+            
             const postValues = posts.map(post => post.dataValues);
             const newObject={
                 ...myObject.dataValues,
@@ -110,3 +111,8 @@ module.exports = {
         }
     }
 }
+
+// SELECT * FROM Posts WHERE userId=1;
+// SELECT * FROM Users WHERE id=1;
+
+// SELECT Posts.* , Users.* from Posts JOIN Users on Posts.userId=Users.id WHERE Users.id=7

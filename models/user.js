@@ -1,9 +1,17 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = new Sequelize('mysql://root:my-secret-pw@localhost:3306/crud');
+const Post = require('./post');
 
-class Post extends Model { }
+class User extends Model {
+    static associate() {
+        User.hasMany(Post, {
+            foreignKey: 'userId',
+            as: 'posts'
+        });
+    }
+}
 
-Post.init({
+User.init({
     id: {
         allowNull: false,
         autoIncrement: true,
@@ -21,4 +29,4 @@ Post.init({
         timestamps: false,
     });
 
-module.exports = Post;
+module.exports = User;

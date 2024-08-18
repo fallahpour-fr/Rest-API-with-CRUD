@@ -1,14 +1,12 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = new Sequelize('mysql://root:my-secret-pw@localhost:3306/crud');
+const User = require('./user');
 
 class Post extends Model {
-        static associate(models) {
-          // Define association here
-          Post.belongsTo(models.User, {
-            foreignKey: 'userId',
-            as: 'user'  // Optional alias for the association
-          });
-        }
+    static associate() {
+
+        Post.belongsTo(User);
+    }
 }
 
 Post.init({
