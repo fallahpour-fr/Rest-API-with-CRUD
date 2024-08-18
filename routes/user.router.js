@@ -8,6 +8,6 @@ router.get('/find-user/:id', userControllers.findUser);
 router.get('/find-all-user', userControllers.findAllUser);
 router.delete('/delete-user/:id', userControllers.deleteUser);
 router.put('/edit-user/:id', userControllers.editUser);
-// router.get('/user-with-post', userControllers.allUserInfo);
+router.get('/user-with-post', userControllers.allUserInfo);
 
 module.exports = router;
