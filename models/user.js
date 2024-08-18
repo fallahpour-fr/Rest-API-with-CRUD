@@ -1,10 +1,10 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = new Sequelize('mysql://root:my-secret-pw@localhost:3306/crud');
-const Post = require('./post');
 
 class User extends Model {
-    static associate() {
-        User.hasMany(Post, {
+    static associate(models) {
+        // Define the association here
+        User.hasMany(models.Post, {
             foreignKey: 'userId',
             as: 'posts'
         });

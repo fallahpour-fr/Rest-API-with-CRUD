@@ -1,6 +1,5 @@
-const User = require('../models/user');
-const Post = require('../models/post');
 const { where, json } = require('sequelize');
+const { User, Post } = require('../models/index');
 
 module.exports = {
     createUser: async (req, res, next) => {
@@ -24,15 +23,22 @@ module.exports = {
             //     where: {
             //         userId: currentUserId
             //     }
-            // });
-
-            
-            const postValues = posts.map(post => post.dataValues);
-            const newObject={
-                ...myObject.dataValues,
-                posts:postValues
-            }
-            res.status(200).json(newObject);
+            // });            
+            // const postValues = posts.map(post => post.dataValues);
+            // const newObject={
+            //     ...myObject.dataValues,
+            //     posts:postValues
+            // }
+            const posts = await Post.findAll({
+                include: [
+                    {
+                        model: User,
+                        where: { id: 7 }, // This applies the WHERE condition on Users
+                        required: true // Ensures that the JOIN behaves as an INNER JOIN
+                    }
+                ]
+            });
+            res.status(200).json(posts);
         } catch (error) {
             console.log(error)
             res.status(500).send();
