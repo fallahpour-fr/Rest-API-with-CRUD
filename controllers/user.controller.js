@@ -15,7 +15,7 @@ module.exports = {
             res.status(500).send();
         }
     },
-    findUser: async (req, res, next) => { 
+    findUser: async (req, res, next) => {
         try {
             const currentUserId = req.params.id;
             // const myObject = await User.findByPk(currentUserId);
@@ -29,6 +29,11 @@ module.exports = {
             //     ...myObject.dataValues,
             //     posts:postValues
             // }
+
+            // SELECT * FROM Posts WHERE userId=1;
+            // SELECT * FROM Users WHERE id=1;
+            // SELECT Posts.* , Users.* from Posts JOIN Users on Posts.userId=Users.id WHERE Users.id=7
+
             const posts = await Post.findAll({
                 include: [
                     {
@@ -115,10 +120,29 @@ module.exports = {
         } catch (error) {
             next(error);
         }
+    },
+    pagination: async (req, res, next) => {
+        try {
+            const page = parseInt(req.query.page) || 1;
+            const limit = parseInt(req.query.limit) || 10;
+            const skip = (page - 1) * limit;
+            const { count, rows } = await User.findAndCountAll({
+                limit: limit,
+                offset: skip
+            });
+            const totalPages = Math.ceil(count / limit);
+            res.json({
+                totalItems: count,
+                totalPages: totalPages,
+                currentPage: page,
+                users: rows,
+            });
+
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 }
 
-// SELECT * FROM Posts WHERE userId=1;
-// SELECT * FROM Users WHERE id=1;
 
-// SELECT Posts.* , Users.* from Posts JOIN Users on Posts.userId=Users.id WHERE Users.id=7

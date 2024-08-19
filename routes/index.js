@@ -5,7 +5,7 @@ const postRouter = require('./post.router');
 const router = express.Router();
 
 // Combine userRouter and postRouter
-router.use(userRouter);
-router.use(postRouter);
+router.use('/user',userRouter);
+router.use('/post',postRouter);
 
 module.exports = router;
