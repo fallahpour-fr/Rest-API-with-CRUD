@@ -51,8 +51,16 @@ module.exports = {
     },
     findAllUser: async (req, res, next) => {
         try {
-            const myData = await User.findAll();
-            res.status(200).json(myData);
+            // const myData = await User.findAll();
+            // res.status(200).json(myData);
+            const usersWithPosts = await Post.findAll({
+                include: [{
+                    model: User,
+                    required: true // Ensures that only posts with associated users are returned
+                }],
+                logging: console.log // Log the raw SQL query to the console
+            });
+            res.status(200).json(usersWithPosts);
         } catch (error) {
             console.log(error)
             res.status(500).send();
@@ -144,5 +152,3 @@ module.exports = {
 
     }
 }
-
-
