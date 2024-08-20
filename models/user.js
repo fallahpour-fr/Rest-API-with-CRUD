@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
-const sequelize = new Sequelize('mysql://root:my-secret-pw@localhost:3306/crud');
+const sequelize = new Sequelize('mysql://root:my-secret-pw@127.0.0.1:3306/crud');
 
 class User extends Model {
     static associate(models) {
