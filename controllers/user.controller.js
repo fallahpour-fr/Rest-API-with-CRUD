@@ -1,18 +1,78 @@
 const { where, json } = require('sequelize');
 const { User, Post } = require('../models/index');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
+const SECRET_KEY = 'your_secret_key';
 
 module.exports = {
     createUser: async (req, res, next) => {
+        // try {
+        //     const { name ,username,password } = req.body;
+        //     const myObject = await User.create({
+        //         name,username,password
+        //     });
+
+        //     res.status(200).json(myObject);
+        // } catch (error) {
+        //     console.log(error)
+        //     res.status(500).send();
+        // }
         try {
-            const { name } = req.body;
-            const myObject = await User.create({
-                name
+            const { name, username, password } = req.body;
+            console.log("name", name)
+
+            // Check if the username is already taken
+            const existingUser = await User.findOne({ where: { username } });
+            if (existingUser) {
+                return res.status(400).json({ message: 'Username already in use' });
+            }
+
+            // Create the user
+            const newUser = await User.create({ name, username, password });
+            const token = jwt.sign({ id: newUser.id, username: newUser.username }, SECRET_KEY, {
+                expiresIn: '1h', // Token expiration time
+            });
+            res.status(201).json({
+                message: "User add successfuly",
+                user: {
+                    id: newUser.id,
+                    name: newUser.name,
+                    username: newUser.username,
+                    token: token
+                }
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Server error');
+        }
+    },
+    loginUser: async (req, res) => {
+        try {
+            const { username, password } = req.body;
+
+            // Find the user by username
+            const user = await User.findOne({ where: { username } });
+
+            if (!user) {
+                return res.status(400).json({ message: 'Invalid username or password' });
+            }
+
+            // Validate password
+            const isMatch = await user.validPassword(password);
+            if (!isMatch) {
+                return res.status(400).json({ message: 'Invalid username or password' });
+            }
+
+            // Generate JWT
+            const token = jwt.sign({ id: user.id, username: user.username }, SECRET_KEY, {
+                expiresIn: '1h',
             });
 
-            res.status(200).json(myObject);
+            res.json({ token });
         } catch (error) {
-            console.log(error)
-            res.status(500).send();
+            console.error(error);
+            res.status(500).send('Server error');
         }
     },
     findUser: async (req, res, next) => {
@@ -150,5 +210,5 @@ module.exports = {
             console.log(error)
         }
 
-    }
+    },
 }
