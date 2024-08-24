@@ -3,8 +3,6 @@ const { User, Post } = require('../models/index');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const SECRET_KEY = 'your_secret_key';
-
 module.exports = {
     createUser: async (req, res, next) => {
         // try {
@@ -30,9 +28,10 @@ module.exports = {
 
             // Create the user
             const newUser = await User.create({ name, username, password });
-            const token = jwt.sign({ id: newUser.id, username: newUser.username }, SECRET_KEY, {
+            const token = jwt.sign({ id: newUser.id, username: newUser.username }, process.env.SECRET_KEY, {
                 expiresIn: '1h', // Token expiration time
             });
+        
             res.status(201).json({
                 message: "User add successfuly",
                 user: {
@@ -65,7 +64,7 @@ module.exports = {
             }
 
             // Generate JWT
-            const token = jwt.sign({ id: user.id, username: user.username }, SECRET_KEY, {
+            const token = jwt.sign({ id: user.id, username: user.username }, process.env.SECRET_KEY, {
                 expiresIn: '1h',
             });
 
