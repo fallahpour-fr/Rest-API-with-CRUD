@@ -1,5 +1,4 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
-// const sequelize = new Sequelize('mysql://root:my-secret-pw@127.0.0.1:3306/crud');
+const { DataTypes, Model } = require('sequelize');
 
 class Permission extends Model {
   static associate(models) {
@@ -21,6 +20,7 @@ function initializePermissionModel(sequelize) {
     {
       sequelize,
       modelName: 'Permission',
+      timestamps: false,
     }
   );
   return Permission;

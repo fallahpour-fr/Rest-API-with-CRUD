@@ -1,5 +1,4 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
-// const sequelize = new Sequelize('mysql://root:my-secret-pw@127.0.0.1:3306/crud');
+const { DataTypes, Model } = require('sequelize');
 const bcrypt = require('bcryptjs');
 
 class User extends Model {

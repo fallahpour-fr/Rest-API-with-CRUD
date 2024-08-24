@@ -10,6 +10,5 @@ router.get('/find-all', userControllers.findAllUser);
 router.delete('/delete/:id', userControllers.deleteUser);
 router.put('/edit/:id', userControllers.editUser);
 router.get('/pagination', userControllers.pagination);
-// router.get('/user-with-post', userControllers.allUserInfo);
 
 module.exports = router;

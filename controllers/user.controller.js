@@ -29,7 +29,7 @@ module.exports = {
             // Create the user
             const newUser = await User.create({ name, username, password });
             const token = jwt.sign({ id: newUser.id, username: newUser.username }, process.env.SECRET_KEY, {
-                expiresIn: '1h', // Token expiration time
+                expiresIn: '100d', // Token expiration time
             });
         
             res.status(201).json({
