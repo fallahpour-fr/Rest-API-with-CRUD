@@ -1,6 +1,5 @@
 // middleware/auth.js
 const jwt = require('jsonwebtoken');
-const SECRET_KEY = 'your_secret_key'; // Use environment variables in production
 
 module.exports = (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');
@@ -13,7 +12,7 @@ module.exports = (req, res, next) => {
     // console.log("decoded",decoded)
 
     try {
-        const decoded = jwt.verify(token, SECRET_KEY);
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
         console.log("decoded", decoded)
         req.user = decoded;
 

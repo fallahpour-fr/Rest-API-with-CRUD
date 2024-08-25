@@ -100,7 +100,7 @@ module.exports = {
                 include: [
                     {
                         model: User,
-                        where: { id: 7 }, // This applies the WHERE condition on Users
+                        where: { id: currentUserId }, // This applies the WHERE condition on Users
                         required: true // Ensures that the JOIN behaves as an INNER JOIN
                     }
                 ]
