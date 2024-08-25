@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const routers = require('./routes');
-const protectedRoutes = require('./routes/protected.router');
+const protectedRoutes = require('./routes/post.router');
 const http = require('http');
 
 const port = 3000;
