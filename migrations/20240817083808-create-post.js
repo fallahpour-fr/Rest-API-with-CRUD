@@ -21,14 +21,6 @@ module.exports = {
           model: 'Users', // The name of the target model
           key: 'id'
         },
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
     });
   },

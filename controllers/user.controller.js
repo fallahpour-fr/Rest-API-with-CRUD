@@ -1,24 +1,12 @@
 const { where, json } = require('sequelize');
-const { User, Post } = require('../models/index');
+const { User, Post, Role, Permission } = require('../models/index');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
     createUser: async (req, res, next) => {
-        // try {
-        //     const { name ,username,password } = req.body;
-        //     const myObject = await User.create({
-        //         name,username,password
-        //     });
-
-        //     res.status(200).json(myObject);
-        // } catch (error) {
-        //     console.log(error)
-        //     res.status(500).send();
-        // }
         try {
             const { name, username, password } = req.body;
-            console.log("name", name)
 
             // Check if the username is already taken
             const existingUser = await User.findOne({ where: { username } });
@@ -26,14 +14,27 @@ module.exports = {
                 return res.status(400).json({ message: 'Username already in use' });
             }
 
-            // Create the user
-            const newUser = await User.create({ name, username, password });
+            //create user
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const newUser = await User.create({ name, username, password: hashedPassword });
+
+            //create role
+            const userRole = await Role.create({ name: "User" });
+
+            //create permission
+            const userPermission = await Permission.create({ name: "Edite" });
+
+            ////////
+            await newUser.addRole(userRole);
+            await userRole.addPermission(userPermission);
+
+            // Generate token
             const token = jwt.sign({ id: newUser.id, username: newUser.username }, process.env.SECRET_KEY, {
-                expiresIn: '100d', // Token expiration time
+                expiresIn: '100d',
             });
-        
+
             res.status(201).json({
-                message: "User add successfuly",
+                message: "User added successfully",
                 user: {
                     id: newUser.id,
                     name: newUser.name,
@@ -41,6 +42,7 @@ module.exports = {
                     token: token
                 }
             });
+
         } catch (error) {
             console.error(error);
             res.status(500).send('Server error');

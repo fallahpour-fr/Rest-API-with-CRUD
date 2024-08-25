@@ -1,7 +1,6 @@
 // middleware/auth.js
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = 'your_secret_key'; // Use environment variables in production
-const { User, Role, Permission } = require('../models');
 
 module.exports = (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');

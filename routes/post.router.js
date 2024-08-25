@@ -5,18 +5,23 @@ const postControllers = require('../controllers/post.controller');
 const adminAccessControllers = require('../controllers/admin.controller');
 
 
-router.post('/create', auth, postControllers.createPost);
-router.get('/find/:id', auth, postControllers.findPost);
-router.get('/find-all', auth, postControllers.findAllPost);
-router.delete('/delete/:id', auth, postControllers.deletePost);
-router.put('/edit/:id', auth, postControllers.editPost);
+router.post('/post/create', auth, postControllers.createPost);
+router.get('/post/find/:id', auth, postControllers.findPost);
+router.get('/post/find-all', auth, postControllers.findAllPost);
+router.delete('/post/delete/:id', auth, postControllers.deletePost);
+router.put('/post/edit/:id', auth, postControllers.editPost);
 
-router.post('/create', auth, adminAccessControllers.createAdminAccess);
-router.get('/find/:id', auth, adminAccessControllers.findAdminAccess);
-router.get('/find-all', auth, adminAccessControllers.findAllAdminAccess);
-router.delete('/delete/:id', auth, adminAccessControllers.deleteAdminAccess);
-router.put('/edit/:id', auth, adminAccessControllers.editAdminAccess);
+router.post('/admin/role/create', auth, adminAccessControllers.createAdminRoleAccess);
+router.get('/admin/role/find/:id', auth, adminAccessControllers.findAdminRoleAccess);
+router.get('/admin/role/find-all', auth, adminAccessControllers.findAllAdminRoleAccess);
+router.delete('/admin/role/delete/:id', auth, adminAccessControllers.deleteAdminRoleAccess);
+router.put('/admin/role/edit/:id', auth, adminAccessControllers.editAdminRoleAccess);
 
-module.exports = router;
+router.post('/admin/permission/create', auth, adminAccessControllers.createAdminPermissionAccess);
+router.get('/admin/permission/find/:id', auth, adminAccessControllers.findAdminPermissionAccess);
+router.get('/admin/permission/find-all', auth, adminAccessControllers.findAllAdminPermissionAccess);
+router.delete('/admin/permission/delete/:id', auth, adminAccessControllers.deleteAdminPermissionAccess);
+router.put('/admin/permission/edit/:id', auth, adminAccessControllers.editAdminPermissionAccess);
+
 
 module.exports = router;

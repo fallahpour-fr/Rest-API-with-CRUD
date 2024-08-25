@@ -5,6 +5,6 @@ const router = express.Router();
 
 // Combine userRouter and postRouter
 router.use('/user',userRouter);
-router.use('/post',postRouter);
+router.use('/protected',postRouter);
 
 module.exports = router;
