@@ -2,8 +2,8 @@ const { DataTypes, Model } = require('sequelize');
 
 class role_permission extends Model {
     static associate(models) {
-        // role_permission.belongsToMany(models.Permission, { through: 'RolePermission', foreignKey: 'roleId', otherKey: 'permissionId' });
-        // role_permission.belongsToMany(models.Role, { through: 'RolePermission', foreignKey: 'permissionId', otherKey: 'roleId' });
+        role_permission.belongsTo(models.Role, { foreignKey: 'roleId' });
+        role_permission.belongsTo(models.Permission, { foreignKey: 'permissionId' });
     }
 }
 
@@ -29,7 +29,7 @@ function initializePermissionRoletModel(sequelize) {
         sequelize,
         modelName: 'role_permission',
         tableName: 'role_permission',
-        timestamps: false, 
+        timestamps: false,
     });
 
     return role_permission;
