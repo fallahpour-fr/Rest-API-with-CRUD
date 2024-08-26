@@ -29,5 +29,5 @@ UserPermission.associate({ User, Permission })
 // Sync models if needed
 sequelize.sync();
 
-module.exports = { sequelize, User, Role, Permission, Post };
+module.exports = { sequelize, User, Role, Permission, Post,UserRole,PermissionRole, UserPermission};
 

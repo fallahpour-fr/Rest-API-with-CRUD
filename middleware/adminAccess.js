@@ -1,32 +1,28 @@
-const { User, Role, Post, Permission } = require('../models');
-const jwt = require('jsonwebtoken');
+const { User, Role, Post, Permission, UserRole } = require('../models');
 
 module.exports = async (req, res, next) => {
-    const token = req.header('Authorization')?.replace('Bearer ', '');
-
-    if (!token) {
-        return res.status(401).json({ message: 'Access denied. No token provided.' });
-    }
-
+    console.log("body name", req.body.name);
+    console.log("user id", req.user.id)
     try {
-        const { name } = req.body;
-        const decoded = jwt.verify(token, process.env.SECRET_KEY);
-        req.user = decoded;
-        const result = await Post.findAll({
-            where: {
-                userId: req.user.id
+        const currentId = req.user.id;
+
+        Role.findAll({
+            attributes: ['name'],
+            include: [{
+                model: UserRole,
+                where: {
+                    user_id: currentId
+                }
+            }]
+        }).then(roles => {
+            console.log(roles);
+            if (roles == "Admin") {
+                console.log("accessebale")
+                next();
+            } else {
+                console.log("error")
             }
         });
-        console.log(result);
-
-        if (result) {
-            console.log("true");
-            const createdRole = await Role.create({ name });
-            res.status(201).json(createdRole);
-            next();
-        } else {
-            console.log("accesse denied")
-        }
 
     } catch (error) {
         console.log("error", error);
