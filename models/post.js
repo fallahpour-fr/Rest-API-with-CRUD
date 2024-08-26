@@ -29,7 +29,7 @@ function initializePostModel(sequelize) {
     }, {
         sequelize,
         modelName: 'Post',
-        timestamps: true,
+        timestamps: false,
     })
     return Post;
 }

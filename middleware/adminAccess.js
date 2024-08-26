@@ -1,4 +1,5 @@
 const { User, Role, Post, Permission } = require('../models');
+const jwt = require('jsonwebtoken');
 
 module.exports = async (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');
@@ -8,6 +9,7 @@ module.exports = async (req, res, next) => {
     }
 
     try {
+        const { name } = req.body;
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
         req.user = decoded;
         const result = await Post.findAll({
@@ -18,8 +20,10 @@ module.exports = async (req, res, next) => {
         console.log(result);
 
         if (result) {
+            console.log("true");
+            const createdRole = await Role.create({ name });
+            res.status(201).json(createdRole);
             next();
-            return true
         } else {
             console.log("accesse denied")
         }

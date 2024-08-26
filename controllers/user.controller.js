@@ -19,7 +19,7 @@ module.exports = {
             const newUser = await User.create({ name, username, password: hashedPassword });
 
             // Add default role and permission
-            const role = await Role.findByPk(1); // Assuming role with id 1 is the default role
+            const role = await Role.findByPk(2); // Assuming role with id 1 is the default role
             if (role) {
                 await newUser.addRole(role);
             }
