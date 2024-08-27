@@ -1,10 +1,10 @@
 const { DataTypes, Model } = require('sequelize');
 
-class user_role extends Model {
+class UserRole extends Model {
 }
 
 function initializeUserRoleModel(sequelize) {
-    user_role.init({
+    UserRole.init({
         userId: {
             type: DataTypes.INTEGER,
             references: {
@@ -23,12 +23,12 @@ function initializeUserRoleModel(sequelize) {
         },
     }, {
         sequelize,
-        modelName: 'user_role',
-        tableName: 'user_role', // Make sure this matches your actual table name
+        modelName: 'UserRole',
+        tableName: 'UserRole', // Make sure this matches your actual table name
         timestamps: false, // Disable timestamps if you don't want createdAt/updatedAt
     })
 
-    return user_role;
+    return UserRole;
 };
 
 module.exports = initializeUserRoleModel;
