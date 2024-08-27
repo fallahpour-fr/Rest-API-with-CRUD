@@ -4,8 +4,8 @@ class user_permission extends Model {
     static associate(models) {
         // user_permission.belongsToMany(models.Permission, { through: 'UserPermission', foreignKey: 'userId', otherKey: 'permissionId' });
         // user_permission.belongsToMany(models.User, { through: 'UserPermission', foreignKey: 'permissionId', otherKey: 'userId' });
-        user_permission.belongsTo(models.User, { foreignKey: 'userId' });
-        user_permission.belongsTo(models.Permission, { foreignKey: 'permissionId' });
+        // user_permission.belongsTo(models.User, { foreignKey: 'userId' });
+        // user_permission.belongsTo(models.Permission, { foreignKey: 'permissionId' });
     }
 }
 

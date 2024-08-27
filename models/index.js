@@ -14,7 +14,7 @@ const Post = initializePostModel(sequelize);
 const Role = initializeRoleModel(sequelize);
 const Permission = initializePermissionModel(sequelize);
 const User = initializeUserModel(sequelize);
-const UserRole = initializeUserRoleModel(sequelize);
+const user_role = initializeUserRoleModel(sequelize);
 const PermissionRole = initializePermissionRoletModel(sequelize);
 const UserPermission = initializeUserPermissionModel(sequelize);
 // Establish associations
@@ -22,12 +22,9 @@ User.associate({ Role, Permission, Post });
 Role.associate({ User, Permission });
 Permission.associate({ User, Role });
 Post.associate({ User });
-UserRole.associate({ User, Role });
-PermissionRole.associate({ Permission, Role });
-UserPermission.associate({ User, Permission })
 
 // Sync models if needed
 sequelize.sync();
 
-module.exports = { sequelize, User, Role, Permission, Post,UserRole,PermissionRole, UserPermission};
+module.exports = { sequelize, User, Role, Permission, Post, user_role, PermissionRole, UserPermission };
 

@@ -188,7 +188,7 @@ module.exports = {
     },
 
 
-    //USERS
+    //Users
     findUser: async (req, res, next) => {
         try {
             const currentUserId = req.params.id;

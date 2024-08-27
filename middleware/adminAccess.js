@@ -1,4 +1,4 @@
-const { User, Role, Post, Permission, UserRole } = require('../models');
+const { User, Role, Post, Permission, user_role } = require('../models');
 
 module.exports = async (req, res, next) => {
     console.log("body name", req.body.name);
@@ -7,22 +7,19 @@ module.exports = async (req, res, next) => {
         const currentId = req.user.id;
 
         Role.findAll({
-            attributes: ['name'],
+            attributes: ['name'], 
             include: [{
-                model: UserRole,
-                where: {
-                    user_id: currentId
-                }
+              model: user_role,
+              where: {
+                userId: currentId
+              },
+              attributes: [] 
             }]
-        }).then(roles => {
+          }).then(roles => {
             console.log(roles);
-            if (roles == "Admin") {
-                console.log("accessebale")
-                next();
-            } else {
-                console.log("error")
-            }
-        });
+          }).catch(error => {
+            console.error('Error:', error);
+          });
 
     } catch (error) {
         console.log("error", error);
