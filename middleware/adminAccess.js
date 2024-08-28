@@ -1,4 +1,4 @@
-const { User, Role, Post, Permission, UserRole } = require('../models');
+const { User, Role } = require('../models');
 
 module.exports = async (req, res, next) => {
     console.log("body name", req.body.name);
@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
             .then(roles => {
                 const roleNames = roles.map(role => role.name); // Extract the role names
                 if(roleNames[0]=='Admin'){
-                    next()
+                    next();
                 }else{
                     console.log('Not Access')
                 }

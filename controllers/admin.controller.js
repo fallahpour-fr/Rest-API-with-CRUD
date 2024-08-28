@@ -4,8 +4,9 @@ module.exports = {
 
     //AdminRole
     createAdminRoleAccess: async (req, res, next) => {
+        console.log('createAdminRoleAccess')
         const { name } = req.body;
-        
+
         const createdRole = await Role.create({ name });
 
         res.status(201).json({
@@ -53,17 +54,17 @@ module.exports = {
             }
 
             // Update user
-            const [updated] = await User.update(roleData, {
+            const [updated] = await Role.update(roleData, {
                 where: { id: roleId }
             });
 
             if (updated) {
-                const updatedUser = await User.findByPk(roleId);
+                const updatedRole = await Role.findByPk(roleId);
                 res.status(200).json({
                     status: 200,
                     statustext: 'Ok',
                     message: 'User updated successfully',
-                    data: updatedUser,
+                    data: updatedRole,
                 });
             } else {
                 res.status(404).json({
@@ -81,10 +82,6 @@ module.exports = {
 
     createAdminPermissionAccess: async (req, res, next) => {
         const { name } = req.body;
-        const existingAdminPermission = await User.findOne({ where: { name } });
-        if (existingAdminPermission) {
-            return res.status(400).json({ message: 'Username already in use' });
-        }
         const newPermission = await Permission.create({ name });
 
         res.status(201).json({
@@ -134,23 +131,23 @@ module.exports = {
             }
 
             // Update user
-            const [updated] = await User.update(permissionData, {
+            const [updated] = await Permission.update(permissionData, {
                 where: { id: permissionId }
             });
 
             if (updated) {
-                const updatedUser = await User.findByPk(permissionId);
+                const updatedPermission = await Permission.findByPk(permissionId);
                 res.status(200).json({
                     status: 200,
                     statustext: 'Ok',
-                    message: 'User updated successfully',
-                    data: updatedUser,
+                    message: 'Permission updated successfully',
+                    data: updatedPermission,
                 });
             } else {
                 res.status(404).json({
                     status: 404,
                     statustext: 'Not Found',
-                    message: 'User not found',
+                    message: 'Permission not found',
                 });
             }
         } catch (error) {
@@ -164,16 +161,10 @@ module.exports = {
         try {
             const currentUserId = req.params.id;
 
-            const posts = await Post.findAll({
-                include: [
-                    {
-                        model: User,
-                        where: { id: currentUserId }, // This applies the WHERE condition on Users
-                        required: true // Ensures that the JOIN behaves as an INNER JOIN
-                    }
-                ]
+            const users = await User.findAll({
+                where: { id: currentUserId }
             });
-            res.status(200).json(posts);
+            res.status(200).json(users);
         } catch (error) {
             console.log(error)
             res.status(500).send();
@@ -181,14 +172,8 @@ module.exports = {
     },
     findAllUser: async (req, res, next) => {
         try {
-            const usersWithPosts = await Post.findAll({
-                include: [{
-                    model: User,
-                    required: true // Ensures that only posts with associated users are returned
-                }],
-                logging: console.log // Log the raw SQL query to the console
-            });
-            res.status(200).json(usersWithPosts);
+            const allUser = await User.findAll({});
+            res.status(200).json(allUser);
         } catch (error) {
             console.log(error)
             res.status(500).send();
