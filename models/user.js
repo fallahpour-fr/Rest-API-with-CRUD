@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 class User extends Model {
     static associate(models) {
         User.hasMany(models.Post, { foreignKey: 'userId' });
-        User.belongsToMany(models.Role, { through: models.UserRole });
+        User.belongsToMany(models.Role, { through: models.UserRole, foreignKey: 'userId' });
     }
 
     // Method to compare passwords

@@ -5,10 +5,7 @@ module.exports = {
     //AdminRole
     createAdminRoleAccess: async (req, res, next) => {
         const { name } = req.body;
-        const existingAdminRole = await User.findOne({ where: { name } });
-        if (existingAdminRole) {
-            return res.status(400).json({ message: 'Username already in use' });
-        }
+        
         const createdRole = await Role.create({ name });
 
         res.status(201).json({
@@ -286,11 +283,5 @@ module.exports = {
             next(error);
         }
     },
-
-    //Change user role
-    changeUserRole: async (req, res, next) => { },
-
-    //Change user permission
-    changeUserPermission: async (req, res, next) => { },
 
 }

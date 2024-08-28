@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('user_role', {
+    await queryInterface.createTable('UserRole', {
       userId: {
         type: Sequelize.INTEGER,
         references: {
@@ -26,6 +26,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('user_role');
+    await queryInterface.dropTable('UserRole');
   }
 };

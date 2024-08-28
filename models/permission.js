@@ -2,7 +2,7 @@ const { DataTypes, Model } = require('sequelize');
 
 class Permission extends Model {
   static associate(models) {
-    Permission.belongsToMany(models.Role, { through:models.RolePermission });
+    Permission.belongsToMany(models.Role, { through: models.RolePermission, foreignKey: 'permissionId' });
   }
 }
 
