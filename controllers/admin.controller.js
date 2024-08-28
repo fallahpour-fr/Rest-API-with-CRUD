@@ -13,19 +13,6 @@ module.exports = {
             createdRole
         });
     },
-    findAdminRoleAccess: async (req, res, next) => {
-        const currentRoleId = req.params.id;
-        const roles = await Role.findAll({
-            include: [
-                {
-                    model: Role,
-                    where: { id: currentRoleId }, // This applies the WHERE condition on Users
-                    required: true // Ensures that the JOIN behaves as an INNER JOIN
-                }
-            ]
-        });
-        res.status(200).json(roles);
-    },
     deleteAdminRoleAccess: async (req, res, next) => {
         try {
             const roleId = req.params.id;
@@ -106,19 +93,6 @@ module.exports = {
                 name: newPermission.name,
             }
         });
-    },
-    findAdminPermissionAccess: async (req, res, next) => {
-        const currentPermissionAccessId = req.params.id;
-        const permissions = await Permission.findAll({
-            include: [
-                {
-                    model: Permission,
-                    where: { id: currentPermissionAccessId }, // This applies the WHERE condition on Users
-                    required: true // Ensures that the JOIN behaves as an INNER JOIN
-                }
-            ]
-        });
-        res.status(200).json(permissions);
     },
     deleteAdminPermissionAccess: async (req, res, next) => {
         try {
