@@ -14,11 +14,11 @@ router.delete('/post/delete/:id', auth, postControllers.deletePost);
 router.put('/post/edit/:id', auth, postControllers.editPost);
 
 router.post('/admin/role/create', auth, adminRoleAccess, adminAccessControllers.createAdminRoleAccess);
-router.delete('/admin/role/delete/:id', auth, adminRoleAccess, adminAccessControllers.deleteAdminRoleAccess);
+// router.delete('/admin/role/delete/:id', auth, adminRoleAccess, adminAccessControllers.deleteAdminRoleAccess);
 router.put('/admin/role/edit/:id', auth, adminRoleAccess, adminAccessControllers.editAdminRoleAccess);
 
 router.post('/admin/permission/create', auth, adminPermissionAccess, adminAccessControllers.createAdminPermissionAccess);
-router.delete('/admin/permission/delete/:id', auth, adminPermissionAccess, adminAccessControllers.deleteAdminPermissionAccess);
+// router.delete('/admin/permission/delete/:id', auth, adminPermissionAccess, adminAccessControllers.deleteAdminPermissionAccess);
 router.put('/admin/permission/edit/:id', auth, adminPermissionAccess, adminAccessControllers.editAdminPermissionAccess);
 
 router.get('/user/find/:id', auth, adminRoleAccess, adminAccessControllers.findUser);
