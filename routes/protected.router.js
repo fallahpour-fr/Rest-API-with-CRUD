@@ -12,8 +12,7 @@ router.get('/post/find-all', auth, postControllers.findAllPost);
 router.delete('/post/delete/:id', auth, postControllers.deletePost);
 router.put('/post/edit/:id', auth, postControllers.editPost);
 
-router.post('/admin/role/create', auth, adminAccess);
-router.get('/admin/role/find/:id', auth, adminAccess, adminAccessControllers.findAdminRoleAccess);
+router.post('/admin/role/create', auth, adminAccess,adminAccessControllers.createAdminRoleAccess);
 router.delete('/admin/role/delete/:id', auth, adminAccess, adminAccessControllers.deleteAdminRoleAccess);
 router.put('/admin/role/edit/:id', auth, adminAccess, adminAccessControllers.editAdminRoleAccess);
 
