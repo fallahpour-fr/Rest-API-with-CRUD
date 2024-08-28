@@ -17,7 +17,6 @@ router.delete('/admin/role/delete/:id', auth, adminAccess, adminAccessController
 router.put('/admin/role/edit/:id', auth, adminAccess, adminAccessControllers.editAdminRoleAccess);
 
 router.post('/admin/permission/create', auth, adminAccess, adminAccessControllers.createAdminPermissionAccess);
-router.get('/admin/permission/find/:id', auth, adminAccess, adminAccessControllers.findAdminPermissionAccess);
 router.delete('/admin/permission/delete/:id', auth, adminAccess, adminAccessControllers.deleteAdminPermissionAccess);
 router.put('/admin/permission/edit/:id', auth, adminAccess, adminAccessControllers.editAdminPermissionAccess);
 
