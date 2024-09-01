@@ -11,7 +11,7 @@ module.exports = {
             res.status(201).json(myObject);
         } catch (error) {
             console.log(error)
-            res.status(500).json({ error: 'An error occurred while creating the post.' });
+            res.status(400).send('Input Error');
         }
     },
     findPost: async (req, res, next) => {
@@ -22,7 +22,7 @@ module.exports = {
 
         } catch (error) {
             console.log(error)
-            res.status(500).send();
+            res.status(400).send('Input Error');
         }
     },
     findAllPost: async (req, res, next) => {
@@ -32,7 +32,7 @@ module.exports = {
 
         } catch (error) {
             console.log(error)
-            res.status(500).send();
+            res.status(400).send('Input Error');
         }
     },
     deletePost: async (req, res, next) => {
@@ -57,7 +57,7 @@ module.exports = {
             }
         } catch (error) {
             console.log(error);
-            res.status(500).send();
+            res.status(400).send('Input Error');
         }
     },
     editPost: async (req, res, next) => {
@@ -97,7 +97,7 @@ module.exports = {
 
         } catch (error) {
             console.log(error)
-            res.status(500).send();
+            res.status(400).send('Input Error');
         }
     },
 }

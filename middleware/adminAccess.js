@@ -1,9 +1,10 @@
 const { User, Role } = require('../models');
 
 module.exports = async (req, res, next) => {
-    console.log("body name", req.body.name);
-    console.log("user id", req.user)
     try {
+        if(!req.use){
+            return res.status(401).json({ message: 'Access denied. No token provided.' });   
+        }
         const currentId = req.user.id;
 
         Role.findAll({
@@ -19,7 +20,7 @@ module.exports = async (req, res, next) => {
                 if(roleNames[0]=='Admin'){
                     next();
                 }else{
-                    console.log('Not Access')
+                    return res.status(401).json({ message: 'Access denied. No token provided.' }); 
                 }
             })
             .catch(error => {

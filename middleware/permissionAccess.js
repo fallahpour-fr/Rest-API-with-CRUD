@@ -1,9 +1,10 @@
 const { User, Permission, Role } = require('../models');
 
 module.exports = async (req, res, next) => {
-    console.log("body name", req.body.name);
-    console.log("user id", req.user)
     try {
+        if(!req.use){
+            return res.status(401).json({ message: 'Access denied. No token provided.' });   
+        }
         const currentId = req.user.id;
 
         Role.findAll({
@@ -31,14 +32,14 @@ module.exports = async (req, res, next) => {
                             if (permissionsNames[0] == 'Create') {
                                 next();
                             } else {
-                                console.log('Not Access')
+                                return res.status(401).json({ message: 'Access denied. No token provided.' }); 
                             }
                         })
                         .catch(error => {
                             console.error('Error fetching permissionss:', error);
                         });
                 } else {
-                    console.log('Not Access')
+                    return res.status(401).json({ message: 'Access denied. No token provided.' }); 
                 }
             })
             .catch(error => {

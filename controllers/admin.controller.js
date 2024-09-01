@@ -4,7 +4,6 @@ module.exports = {
 
     //AdminRole
     createAdminRoleAccess: async (req, res, next) => {
-        console.log('createAdminRoleAccess')
         const { name } = req.body;
 
         const createdRole = await Role.create({ name });
@@ -49,7 +48,7 @@ module.exports = {
                 });
             }
         } catch (error) {
-            next(error);
+            res.status(400).send('Input Error');
         }
     },
 
@@ -101,7 +100,7 @@ module.exports = {
                 });
             }
         } catch (error) {
-            next(error);
+            res.status(400).send('Input Error');
         }
     },
 
@@ -117,7 +116,7 @@ module.exports = {
             res.status(200).json(users);
         } catch (error) {
             console.log(error)
-            res.status(500).send();
+            res.status(400).send('Input Error');
         }
     },
     findAllUser: async (req, res, next) => {
@@ -126,7 +125,7 @@ module.exports = {
             res.status(200).json(allUser);
         } catch (error) {
             console.log(error)
-            res.status(500).send();
+            res.status(400).send('Input Error');
         }
     },
     deleteUser: async (req, res, next) => {
@@ -151,7 +150,7 @@ module.exports = {
             }
         } catch (error) {
             console.log(error);
-            res.status(500).send();
+            res.status(400).send('Input Error');
         }
     },
     editUser: async (req, res, next) => {
@@ -189,7 +188,7 @@ module.exports = {
                 });
             }
         } catch (error) {
-            next(error);
+            res.status(400).send('Input Error');
         }
     },
 

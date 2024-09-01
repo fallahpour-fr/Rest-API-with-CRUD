@@ -46,7 +46,7 @@ module.exports = {
 
         } catch (error) {
             console.error(error);
-            res.status(500).send('Server error');
+            res.status(400).send('User Input Error');
         }
     },
     loginUser: async (req, res) => {
@@ -74,7 +74,7 @@ module.exports = {
             res.json({ token });
         } catch (error) {
             console.error(error);
-            res.status(500).send('Server error');
+            res.status(400).send('User Input Error');
         }
     },
     pagination: async (req, res, next) => {
@@ -95,7 +95,8 @@ module.exports = {
             });
 
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            res.status(400).send('User Input Error');
         }
 
     },
