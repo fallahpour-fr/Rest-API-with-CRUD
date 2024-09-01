@@ -24,7 +24,6 @@ function initializeRolePermissiontModel(sequelize) {
     }, {
         sequelize,
         modelName: 'RolePermission',
-        tableName: 'RolePermission',
         timestamps: false,
     });
 

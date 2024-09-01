@@ -24,7 +24,6 @@ function initializeUserRoleModel(sequelize) {
     }, {
         sequelize,
         modelName: 'UserRole',
-        tableName: 'UserRole', // Make sure this matches your actual table name
         timestamps: false, // Disable timestamps if you don't want createdAt/updatedAt
     })
 

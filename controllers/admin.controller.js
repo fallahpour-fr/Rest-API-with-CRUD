@@ -14,31 +14,6 @@ module.exports = {
             createdRole
         });
     },
-    // deleteAdminRoleAccess: async (req, res, next) => {
-    //     try {
-    //         const roleId = req.params.id;
-    //         const result = await Role.destroy({
-    //             where: { id: roleId }
-    //         });
-
-    //         if (result) {
-    //             res.status(200).json({
-    //                 status: 200,
-    //                 statustext: 'Delete',
-    //                 message: 'User deleted successfully'
-    //             });
-    //         } else {
-    //             res.status(404).json({
-    //                 status: 404,
-    //                 statustext: 'Not Found',
-    //                 message: 'User not found'
-    //             });
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //         res.status(500).send();
-    //     }
-    // },
     editAdminRoleAccess: async (req, res, next) => {
         try {
             const roleId = req.params.id;
@@ -91,31 +66,6 @@ module.exports = {
             }
         });
     },
-    // deleteAdminPermissionAccess: async (req, res, next) => {
-    //     try {
-    //         const permissionId = req.params.id;
-    //         const result = await Permission.destroy({
-    //             where: { id: permissionId }
-    //         });
-
-    //         if (result) {
-    //             res.status(200).json({
-    //                 status: 200,
-    //                 statustext: 'Delete',
-    //                 message: 'User deleted successfully'
-    //             });
-    //         } else {
-    //             res.status(404).json({
-    //                 status: 404,
-    //                 statustext: 'Not Found',
-    //                 message: 'User not found'
-    //             });
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //         res.status(500).send();
-    //     }
-    // },
     editAdminPermissionAccess: async (req, res, next) => {
         try {
             const permissionId = req.params.id;
