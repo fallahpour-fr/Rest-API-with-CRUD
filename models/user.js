@@ -1,14 +1,10 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
-const sequelize = new Sequelize('mysql://root:my-secret-pw@127.0.0.1:3306/crud');
+const { DataTypes, Model } = require('sequelize');
 const bcrypt = require('bcryptjs');
 
 class User extends Model {
     static associate(models) {
-        // Define the association here
-        User.hasMany(models.Post, {
-            foreignKey: 'userId',
-            as: 'posts'
-        });
+        User.hasMany(models.Post, { foreignKey: 'userId' });
+        User.hasOne(models.Role, { through: models.UserRole, foreignKey: 'userId' });
     }
 
     // Method to compare passwords
@@ -17,36 +13,34 @@ class User extends Model {
     }
 }
 
-User.init({
-    id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: DataTypes.INTEGER,
-    },
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    username: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
-},
-    {
-        sequelize,
-        modelName: 'User',
-        timestamps: false,
-        hooks: {
-            beforeCreate: async (user) => {
-                const salt = await bcrypt.genSalt(10);
-                user.password = await bcrypt.hash(user.password, salt);
-            },
+function initializeUserModel(sequelize) {
+    User.init({
+        id: {
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
+            type: DataTypes.INTEGER,
         },
-    });
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
+    },
+        {
+            sequelize,
+            modelName: 'User',
+            timestamps: false,
+        }
+    );
 
-module.exports = User;
+    return User
+}
+module.exports = initializeUserModel;

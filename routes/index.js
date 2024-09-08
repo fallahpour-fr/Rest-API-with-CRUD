@@ -1,12 +1,9 @@
 const express = require('express');
-const userRouter = require('./user.router');
-const postRouter = require('./post.router');
-const protectedRouter = require('./protected');
+const publicRouter = require('./public.router');
+const protectedRouter = require('./protected.router');
 const router = express.Router();
 
-// Combine userRouter and postRouter
-router.use('/user',userRouter);
-router.use('/post',postRouter);
-router.use('/post',protectedRouter);
+router.use('/public', publicRouter);
+router.use('/protected', protectedRouter);
 
 module.exports = router;
