@@ -1,21 +1,21 @@
 {
   "development": {
     "username": "root",
-    "password": "mypassword",
+    "password": "my-secret-pw",
     "database": "crud",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "mypassword",
+    "password": "my-secret-pw",
     "database": "crud_test",
     "host": "localhost",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "mypassword",
+    "password": "my-secret-pw",
     "database": "crud_production",
     "host": "localhost",
     "dialect": "mysql"

@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start-dev": "env-cmd -f .env.development nodemon server.js start",
-    "build-dev": "env-cmd -f .env.development nodemon server.js build",
-    "start": "env-cmd -f .env.production nodemon server.js start",
-    "build": "env-cmd -f .env.production nodemon server.js build",
-    "test": "nodemon server.js test",
-    "eject": "nodemon server.js eject"
+    "start-dev": "nodemon index.js start",
+    "build-dev": "nodemon index.js build",
+    "start": "nodemon index.js start",
+    "build": "nodemon index.js build",
+    "test": "nodemon index.js test",
+    "eject": "nodemon index.js eject"
   },
   "author": "",
   "license": "ISC",

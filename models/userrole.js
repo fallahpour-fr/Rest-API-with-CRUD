@@ -1,7 +1,6 @@
 const { DataTypes, Model } = require('sequelize');
 
-class UserRole extends Model {
-}
+class UserRole extends Model {}
 
 function initializeUserRoleModel(sequelize) {
     UserRole.init({
@@ -12,6 +11,8 @@ function initializeUserRoleModel(sequelize) {
                 key: 'id',
             },
             allowNull: false,
+            primaryKey: true, // Ensure this is marked as primary key in the model as well
+            foreignKey: 'userId'
         },
         roleId: {
             type: DataTypes.INTEGER,
@@ -20,12 +21,14 @@ function initializeUserRoleModel(sequelize) {
                 key: 'id',
             },
             allowNull: false,
+            primaryKey: true, // Ensure this is marked as primary key in the model as well
+            foreignKey:'roleId'
         },
     }, {
         sequelize,
         modelName: 'UserRole',
         timestamps: false, // Disable timestamps if you don't want createdAt/updatedAt
-    })
+    });
 
     return UserRole;
 };
